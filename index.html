@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NASA Multimedia Search</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-dark">
+  <main>
+    <div class="text-center container">
+      <div class="row py-lg-3">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light text-light main-title">NASA Multimedia Search</h1>
+          <div class="input-group">
+            <span class="input-group-text bg-dark text-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+            </span>
+            <input type="search" class="form-control bg-dark text-light" name="buscar" id="inputBuscar">
+          </div>
+          
+          <button class="btn btn-primary my-2 btn-dark" id="btnBuscar">Search for Images</button>
+          <button class="btn btn-primary my-2 btn-dark" id="btnApod">Picture of the Day</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div id="contenedor" class="row">
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-muted py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to Top</a>
+      </p>
+      <p class="mb-1">Site generated for educational purposes as a part of <a href="https://jovenesaprogramar.edu.uy/" target="_blank">
+          Jovenes a Programar</a> using data from <a href="https://api.nasa.gov/" target="_blank">
+          api.nasa.gov</a></p>
+    </div>
+  </footer>
+  <script src="js/init.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
