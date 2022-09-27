@@ -6,6 +6,7 @@ let apodBtn = document.getElementById("btnApod");
 let searchBtn = document.getElementById("btnBuscar");
 let dataContainer = document.getElementById("contenedor");
 
+//Shows data from Images and Video NASA API
 function showData() {
   let contentToAppend = "";
   for (i = 0; i < searchData.length; i++) {
@@ -32,13 +33,37 @@ function showData() {
   dataContainer.innerHTML = contentToAppend;
 }
 
+//Stores data to display at more_info.html 
 function moreInfo(index) {
   let data = JSON.stringify(searchData[index]);
   localStorage.setItem("more_info", data);
   window.location = 'more_info.html';
 };
 
+//Returns the html content depending on source of image/video
+function apod(data){
+  let htmlContent = "";
+  if (data.includes("jpg")){
+    htmlContent = `<img id="apod" class="img-fluid" src="${data.url}" alt="Astronomy Picture of the Day">`
+  }
+  if (data.includes("mp4")){
+    htmlContent = `  <div class="ratio ratio-4x3">
+    <video controls>
+    <source src="${data}" type="video/mp4">
+    Your browser does not support the video tag.
+    </video>
+  </div>`
+  }
+  if (data.includes("youtube")){
+    htmlContent = `<div class="ratio ratio-4x3"><iframe src="${data}"></iframe></div>`
+  }
+  return htmlContent;
+}
+
+//Adds following listeners when document is loaded
 document.addEventListener("DOMContentLoaded", ()=> {
+
+  //To search NASA images and videos (Images and Video Library API)
   searchBtn.addEventListener("click", ()=> {
     let searchQuery = document.getElementById("inputBuscar").value;
     if (searchQuery !== ""){
@@ -51,22 +76,23 @@ document.addEventListener("DOMContentLoaded", ()=> {
   }
 });
 
-apodBtn.addEventListener("click", ()=> 
-    getData(APOD_URL).then(data => {
-      dataContainer.innerHTML = `
-        <div class="col-12 text-center text-light main-title mb-4">
-          <h2>Astronomy Picture of the Day</h2>
-          <p><strong>${data.date}</strong></p>
-        </div>
-        <div class="col-lg-6 shadow-sm p-0 mb-3 border border-light bg-dark rounded">
-          <img id="apod" class="img-fluid" src="${data.url}" alt="Astronomy Picture of the Day">
-        </div>
-        <div class="col-lg-6 text-light desc-text">
-          <h5>${data.title}</h5>
-          <p>${data.explanation}</p>
-        </div>
-      `;
-  }))
+  //To see Astronomy Picture of the Day (APOD API)
+  apodBtn.addEventListener("click", ()=> 
+      getData(APOD_URL).then(data => {
+        dataContainer.innerHTML = `
+          <div class="col-12 text-center text-light main-title mb-4">
+            <h2>Astronomy Picture of the Day</h2>
+            <p><strong>${data.date}</strong></p>
+          </div>
+          <div class="col-lg-6 shadow-sm p-0 mb-3 border border-light bg-dark rounded">
+            ${apod(data.url)}
+          </div>
+          <div class="col-lg-6 text-light desc-text">
+            <h5>${data.title}</h5>
+            <p>${data.explanation}</p>
+          </div>
+        `;
+    }))
 });
 
 
