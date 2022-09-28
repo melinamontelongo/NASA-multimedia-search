@@ -44,7 +44,7 @@ function moreInfo(index) {
 function apod(data){
   let htmlContent = "";
   if (data.includes("jpg")){
-    htmlContent = `<img id="apod" class="img-fluid" src="${data.url}" alt="Astronomy Picture of the Day">`
+    htmlContent = `<img id="apod" class="img-fluid" src="${data}" alt="Astronomy Picture of the Day">`
   }
   if (data.includes("mp4")){
     htmlContent = `  <div class="ratio ratio-4x3">
@@ -56,6 +56,8 @@ function apod(data){
   }
   if (data.includes("youtube")){
     htmlContent = `<div class="ratio ratio-4x3"><iframe src="${data}"></iframe></div>`
+  } else if (data == undefined){
+    htmlContent = `<div class="text-light desc-text text-center m-4">Multimedia resource not available</div>`
   }
   return htmlContent;
 }
