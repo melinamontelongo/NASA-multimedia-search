@@ -11,7 +11,9 @@ main {
   height: 120px;
   object-fit: cover;
 } 
-
+.card-img-top:hover, .btn:hover{
+  cursor: pointer;
+}
 .card:hover{
   transform: scale(1.1);
   z-index: 1;
