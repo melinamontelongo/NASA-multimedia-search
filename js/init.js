@@ -1,8 +1,22 @@
+const IMAGES_URL = "https://images-api.nasa.gov/search?q=";
+const APOD_URL = "https://api.nasa.gov/planetary/apod?api_key=iJ06LyjQvV4NQ9JoplcVlqdHOqWBSodZ9ceuIPAa";
+
+function showSpinner(){
+  document.getElementById("spinner-wrapper").style.display = "block";
+}
+function hideSpinner(){
+  document.getElementById("spinner-wrapper").style.display = "none";
+}
+
 async function getData(url){
+  showSpinner();
     try{
       let response = await fetch(url);
       let data = await response.json();
-      return data;
+      if (response.ok){
+        hideSpinner();
+        return data;
+      }
     } catch (error) {
       console.error(error)
     }
